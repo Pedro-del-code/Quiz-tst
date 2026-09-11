@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QUIZ TIME! — Redação</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v={{ v }}">
+</head>
+<body>
+
+<div id="app">
+
+  <button id="mute-btn" title="Ativar/desativar som">🔊</button>
+  <button id="fullscreen-btn" title="Tela cheia">⛶</button>
+
+  <!-- INTRO -->
+  <div class="screen active" id="screen-intro">
+    <div class="intro-scanline"></div>
+    <div class="intro-float f1">📺</div>
+    <div class="intro-float f2">⭐</div>
+    <div class="intro-float f3">✏️</div>
+    <div class="intro-float f4">🏆</div>
+    <div class="intro-float f5">⭐</div>
+    <div id="intro-card">
+      <canvas id="intro-mascot" width="230" height="300" aria-hidden="true"></canvas>
+      <img id="time-logo" src="{{ url_for('static', filename='img/time_logo.jpg') }}?v={{ v }}" alt="TIME!">
+      <div id="intro-title">QUIZ DA REDAÇÃO</div>
+      <div id="intro-sub">Você tem o que é preciso para tirar nota 1000?</div>
+      <div id="intro-chips">
+        <div class="intro-chip">📝 10 perguntas</div>
+        <div class="intro-chip">🎬 estilo game show</div>
+        <div class="intro-chip">⌨️ setas + Enter</div>
+      </div>
+      <button class="btn-start" id="btn-start">▶ COMEÇAR</button>
+      <div class="small-note">toque para ativar o som · setas + Enter também funcionam</div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="screen" id="screen-quiz">
+    <div id="quiz-stage">
+      <div id="tv-frame">
+        <div id="quiz-content">
+          <div id="quiz-topbar">
+            <span id="quiz-progress-label">PERGUNTA 1/{{ total }}</span>
+            <span id="quiz-score-label">PONTOS: 0</span>
+          </div>
+          <div class="progress-dots" id="progress-dots"></div>
+          <div id="question-text">Carregando...</div>
+        </div>
+        <div id="options"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="feedback-banner"></div>
+
+  <!-- RESULT -->
+  <div class="screen" id="screen-result">
+    <div id="result-card">
+      <canvas id="result-host" width="230" height="300" aria-label="apresentador animado do quiz"></canvas>
+      <div id="result-title">FIM DE JOGO!</div>
+      <div id="result-score">0/{{ total }}</div>
+      <div id="result-msg"></div>
+      <div id="result-buttons">
+        <button class="btn-start" id="btn-retry">↻ JOGAR DE NOVO</button>
+        <button class="btn-start btn-secondary" id="btn-credits">CRÉDITOS ▸</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREDITS -->
+  <div class="screen" id="screen-credits">
+    <div id="credits-viewport">
+      <div id="credits-track">
+        <p class="credits-heading">QUIZ DA REDAÇÃO</p>
+        <p class="credits-sub">um quiz estilo Deltarune</p>
+        <p class="credits-spacer"></p>
+        <p class="credits-label">Criado por</p>
+        <p class="credits-name credits-big">Pedro Henrique</p>
+        <p class="credits-spacer"></p>
+        <p class="credits-label">Grupo</p>
+        <p class="credits-name">Hiasmin</p>
+        <p class="credits-name">Luiz Eduardo</p>
+        <p class="credits-name">Isaac</p>
+        <p class="credits-name">Ramon</p>
+        <p class="credits-name">Lara</p>
+        <p class="credits-name">Lorrany</p>
+        <p class="credits-name">Miguel</p>
+        <p class="credits-name">Maria Eduarda Lopes</p>
+        <p class="credits-spacer"></p>
+        <p class="credits-thanks">Obrigado por jogar! ♥</p>
+      </div>
+    </div>
+    <button class="btn-start" id="btn-credits-back">◂ VOLTAR</button>
+  </div>
+
+</div>
+
+<audio id="audio-theme" src="{{ url_for('static', filename='audio/theme.mp3') }}?v={{ v }}" loop></audio>
+<audio id="audio-tvtime" src="{{ url_for('static', filename='audio/tvtime.mp3') }}?v={{ v }}"></audio>
+<audio id="audio-correct" src="{{ url_for('static', filename='audio/correct.mp3') }}?v={{ v }}"></audio>
+<audio id="audio-wrong" src="{{ url_for('static', filename='audio/wrong.mp3') }}?v={{ v }}"></audio>
+
+<script>
+  const BG_QUESTION = "{{ url_for('static', filename='img/bg_question.jpg') }}?v={{ v }}";
+  const BG_STAGE = "{{ url_for('static', filename='img/bg_stage.jpg') }}?v={{ v }}";
+  const TOTAL_QUESTIONS = {{ total }};
+</script>
+<script src="{{ url_for('static', filename='js/quiz.js') }}?v={{ v }}"></script>
+
+</body>
+</html>
